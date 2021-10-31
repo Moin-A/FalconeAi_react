@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 let lastid = 0;
 const slice = createSlice({
   name: "api",
-  initialState: {},
+  initialState: { planetList: [], vehiclesList: [] },
   reducers: {
     loadapi: (api, actions) => {
       api.planetList = actions.payload.posts.posts1;
@@ -15,5 +15,5 @@ const slice = createSlice({
   },
 });
 
-export const { bugsAdded, bugsRemoved, error, loadapi, dummy } = slice.actions;
+export const { loadapi } = slice.actions;
 export default slice.reducer;

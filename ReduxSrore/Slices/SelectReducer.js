@@ -1,14 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+var id = 0;
 const slice = createSlice({
   name: "Select",
-  initialState: {},
+  initialState: { currentPlanet: {}, currentVehicle: {} },
   reducers: {
     Planet: (initialState, actions) => {
-      debugger;
-      initialState.planet = { ...initialState.planet, ...actions.payload };
+      initialState.currentPlanet = Object.values(actions.payload)[0][0];
+
+      initialState.planet = {
+        ...initialState.planet,
+        ...actions.payload,
+      };
+      return initialState;
     },
     Vehicle: (initialState, actions) => {
+      initialState.currentVehicle = Object.values(actions.payload)[0][0];
+      debugger;
       initialState.vehicle = { ...initialState.vehicle, ...actions.payload };
     },
   },
