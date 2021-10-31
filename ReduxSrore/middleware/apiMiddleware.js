@@ -1,6 +1,25 @@
 import axios from "axios";
+import { createAction } from "@reduxjs/toolkit";
+import { Planet, Vehicle } from "../Slices/SelectReducer";
+export const buttonClick = createAction("Action/buttonClick");
+
 export const apiMiddleware = ({ dispatch }) => (next) => async (action) => {
-  next(action);
+  const { payload, type } = action;
+
+  switch (type) {
+    case buttonClick.type:
+      if (payload.item.speed) {
+        next(action);
+        dispatch(Vehicle({ [payload.item.name]: [payload.item] }));
+        return;
+      }
+      next(action);
+      dispatch(Planet({ [payload.item.name]: [payload.item] }));
+      return;
+
+    default:
+      return next(action);
+  }
 
   // const { url, onSuccess, onFailure } = action.type;
 

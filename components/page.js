@@ -2,7 +2,7 @@ function page({ children }) {
   return (
     <>
       <div>
-        <header className="shadow sticky inset-0">
+        <header className="shadow sticky inset-0 z-10">
           <nav className="bg-white py-2 md:py-4">
             <div className="container px-4 mx-auto md:flex md:items-center">
               <div className="flex justify-between items-center">

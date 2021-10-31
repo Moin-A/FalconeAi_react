@@ -1,20 +1,17 @@
 import "../styles/globals.css";
-import { StoreContext } from "../Context/storeContext";
+import store from "../ReduxSrore/configureStore";
 import Page from "../components/page";
-export function reportWebVitals(metric) {
-  if (metric.label === "custom") {
-    console.log(metric);
-  }
-}
+import { Provider } from "react-redux";
+
 function MyApp({ Component, pageProps }) {
   return (
-    <StoreContext>
+    <Provider store={store}>
       <Page>
         <main>
           <Component {...pageProps} />
         </main>
       </Page>
-    </StoreContext>
+    </Provider>
   );
 }
 
