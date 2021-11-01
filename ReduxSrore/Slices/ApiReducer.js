@@ -8,12 +8,19 @@ const slice = createSlice({
       api.planetList = actions.payload.posts.posts1;
       api.vehiclesList = actions.payload.posts.posts2;
     },
-    dummy: (api, actions) => {
-      api.planetList = [1, 3];
-      api.vehiclesList = [1, 3];
+    modCount: (api, { payload }) => {
+      debugger;
+      var item = { ...payload };
+      item["total_no"]--;
+      api.vehiclesList = api.vehiclesList.map((x) => {
+        if (x.name == payload.name) {
+          return item;
+        }
+        return x;
+      });
     },
   },
 });
 
-export const { loadapi } = slice.actions;
+export const { loadapi, modCount } = slice.actions;
 export default slice.reducer;

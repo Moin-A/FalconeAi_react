@@ -1,7 +1,6 @@
 import React from "react";
 
 function Button({ disabled, item, currentVehicle }) {
-  debugger;
   return (
     <button
       disabled={disabled}

@@ -15,7 +15,6 @@ const slice = createSlice({
     },
     Vehicle: (initialState, actions) => {
       initialState.currentVehicle = Object.values(actions.payload)[0][0];
-      debugger;
       initialState.vehicle = { ...initialState.vehicle, ...actions.payload };
     },
   },

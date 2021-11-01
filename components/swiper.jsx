@@ -14,7 +14,7 @@ export default function App({ List = [] }) {
   );
 
   const dispatch = useDispatch();
-  debugger;
+
   return (
     <>
       <Swiper className="mySwiper   flex">
