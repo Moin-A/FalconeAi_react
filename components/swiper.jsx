@@ -21,6 +21,7 @@ export default function App({ List = [] }) {
         {List.map((item) => (
           <SwiperSlide className="group">
             <Card dat={item} />
+
             {item.speed && (
               <div
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
@@ -28,7 +29,13 @@ export default function App({ List = [] }) {
                   dispatch(buttonClick({ item }));
                 }}
               >
-                <Button disabled={currentPlanet.distance > item.max_distance} />
+                <Button
+                  item={item}
+                  disabled={
+                    currentPlanet.distance > item.max_distance ||
+                    item.total_no == 0
+                  }
+                />
               </div>
             )}
             {!item.speed && (

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAction } from "@reduxjs/toolkit";
 import { Planet, Vehicle } from "../Slices/SelectReducer";
-import { modCount } from "../Slices/ApiReducer";
+import { modVehicleCount } from "../Slices/ApiReducer";
 export const buttonClick = createAction("Action/buttonClick");
 
 export const apiMiddleware = ({ dispatch, getState }) => (next) => async (
@@ -14,7 +14,10 @@ export const apiMiddleware = ({ dispatch, getState }) => (next) => async (
       if (payload.item.speed) {
         next(action);
         dispatch(Vehicle({ [payload.item.name]: [payload.item] }));
-        dispatch(modCount(payload.item));
+        dispatch(
+          modVehicleCount({ data: payload.item, id: getState().Api.id })
+        );
+        return;
       }
       next(action);
       dispatch(Planet({ [payload.item.name]: [payload.item] }));
