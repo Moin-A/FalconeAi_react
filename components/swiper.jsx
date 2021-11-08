@@ -9,10 +9,11 @@ import { buttonClick } from "../ReduxSrore/middleware/apiMiddleware";
 import Button from "./button";
 
 export default function App({ List = [] }) {
-  const { currentPlanet, currentVehicle } = useSelector(
+  const { currentPlanet, currentVehicle, planet, vehicle } = useSelector(
     (state) => state.Select
   );
-
+  let planetList = Object.values(planet).map((x) => x.name);
+  debugger;
   const dispatch = useDispatch();
 
   return (
@@ -33,6 +34,7 @@ export default function App({ List = [] }) {
                   item={item}
                   disabled={
                     currentPlanet.distance > item.max_distance ||
+                    item.name === currentVehicle.name ||
                     item.total_no == 0
                   }
                 />
@@ -48,7 +50,10 @@ export default function App({ List = [] }) {
                 <Button
                   item={item}
                   currentVehicle={currentVehicle}
-                  disabled={currentVehicle.max_distance < item.distance}
+                  disabled={
+                    currentVehicle.max_distance <= item.distance ||
+                    planetList.includes(item.name)
+                  }
                 />
               </div>
             )}
