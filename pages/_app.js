@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import "../tailwind.css";
 import store from "../ReduxSrore/configureStore";
 import Page from "../components/page";
 import { Provider } from "react-redux";
