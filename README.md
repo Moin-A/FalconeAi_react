@@ -7,3 +7,5 @@ command : `npm run dev`
 ## Minimum Requirement
 
 node Version ---v14
+
+live Link to tested in [Live](https://falcone-ai-react.vercel.app/)
