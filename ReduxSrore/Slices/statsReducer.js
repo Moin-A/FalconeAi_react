@@ -7,7 +7,7 @@ const slice = createSlice({
   reducers: {
     initSuccess: (stats, actions) => {
       const { result, planetList, vehicleList } = actions.payload;
-      debugger;
+
       let totaltimearray = Object.values(planetList[0]).map((el, index) => {
         return el.distance / Object.values(vehicleList)[0][index].speed;
       });
@@ -22,7 +22,6 @@ const slice = createSlice({
       };
     },
     initFailure: (stats, actions) => {
-      debugger;
       return {
         Result: "FAILURE",
         Planet_found: "NA",
