@@ -31,13 +31,12 @@ const slice = createSlice({
         initialState.id++;
         voyage.planet = false;
         voyage.vehicle = false;
-        debugger;
+
         initialState.currentPlanet = [];
         initialState.currentVehicle = [];
       }
     },
     resetSelect: (initialState, actions) => {
-      debugger;
       initialState.currentPlanet = [];
       initialState.currentVehicle = [];
       initialState.planet = {};

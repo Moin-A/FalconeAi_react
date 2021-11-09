@@ -6,9 +6,11 @@ import {
   modVoyage,
   resetSelect,
 } from "../Slices/SelectReducer";
+import { initFailure, initSuccess } from "../Slices/statsReducer";
 import { modVehicleCount, resetApi } from "../Slices/ApiReducer";
 export const buttonClick = createAction("Action/buttonClick");
 export const reset = createAction("Action/reset");
+export const Submit = createAction("Api/Submit");
 
 export const apiMiddleware = ({ dispatch, getState }) => (next) => async (
   action
@@ -16,8 +18,44 @@ export const apiMiddleware = ({ dispatch, getState }) => (next) => async (
   const { payload, type } = action;
 
   switch (type) {
+    case Submit.type:
+      let planet_names = Object.values(getState().Select.planet).map(
+        (x) => x.name
+      );
+      let vehicle_names = Object.values(getState().Select.vehicle).map(
+        (x) => x.name
+      );
+
+      await fetch("https://findfalcone.herokuapp.com/token", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: {},
+      })
+        .then((response) => response.json())
+        .then(({ token }) => {
+          fetch("https://findfalcone.herokuapp.com/find", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({ token, planet_names, vehicle_names }),
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              result.status === "success"
+                ? dispatch(initSuccess({ result }))
+                : dispatch(initFailure({ result }));
+            });
+        });
+
+      next(action);
+
+      return;
     case reset.type:
-      debugger;
       next(action);
       dispatch(resetSelect());
       dispatch(resetApi());
@@ -44,13 +82,4 @@ export const apiMiddleware = ({ dispatch, getState }) => (next) => async (
     default:
       return next(action);
   }
-
-  // const { url, onSuccess, onFailure } = action.type;
-
-  // try {
-  //   const response = await axios.get(url);
-  //   dispatch({ type: onSuccess, payload: response });
-  // } catch (error) {
-  //   dispatch({ type: onFailure, payload: error });
-  // }
 };

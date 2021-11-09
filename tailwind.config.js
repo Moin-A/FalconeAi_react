@@ -4,9 +4,16 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      backgroundImage: (theme) => ({
+        "hero-pattern": "url('/background.svg')",
+        "fancy-hero-pattern": "url('/fancybg.svg')",
+      }),
       height: {
         fit: "fit-content",
         "fit-screen": "79%",
+      },
+      fontFamily: {
+        sans: ["Roboto", "Helvetica", "Arial", "sans-serif"],
       },
       animation: {
         "spin-slow": "ping 1s cubic-bezier(0, 0, 0.2, 1) 1;",

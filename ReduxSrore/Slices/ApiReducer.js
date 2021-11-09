@@ -19,8 +19,11 @@ const slice = createSlice({
       };
     },
     resetApi: (api, actions) => {
-      api.planetList = api.List.pla;
-      api.vehicletList = api.List.veh;
+      return {
+        ...api,
+        planetList: [...api.List.pla],
+        vehiclesList: [...api.List.veh],
+      };
     },
     modVehicleCount: (api, { payload }) => {
       if (payload.data.name !== current && id == payload.id) {
@@ -46,5 +49,5 @@ const slice = createSlice({
   },
 });
 
-export const { loadapi, modVehicleCount, resetApi } = slice.actions;
+export const { loadapi, modVehicleCount, resetApi, getToken } = slice.actions;
 export default slice.reducer;
