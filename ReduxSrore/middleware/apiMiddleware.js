@@ -47,7 +47,13 @@ export const apiMiddleware = ({ dispatch, getState }) => (next) => async (
             .then((response) => response.json())
             .then((result) => {
               result.status === "success"
-                ? dispatch(initSuccess({ result }))
+                ? dispatch(
+                    initSuccess({
+                      result,
+                      planetList: [getState().Select.planet],
+                      vehicleList: [getState().Select.vehicle],
+                    })
+                  )
                 : dispatch(initFailure({ result }));
             });
         });

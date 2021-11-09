@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import Buttonfncy from "./fancyButton";
 import { reset, Submit } from "../ReduxSrore/middleware/apiMiddleware";
-import { useRouter } from "next/router";
 
 const statusbar = () => {
   const dispatch = useDispatch();
